@@ -26,10 +26,15 @@
       white-space: nowrap;
     }
 
-    /* Visualization: keep BEV and front-view GIFs equal in displayed height
-       while preserving each GIF's native aspect ratio without cropping. */
+    /* Visualization layout */
     .visualization-subsection {
       margin-top: 1.25rem;
+    }
+
+    .visualization-subsection + .visualization-subsection {
+      margin-top: 2.4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(40, 55, 80, 0.10);
     }
 
     .visualization-subsection-heading {
@@ -53,7 +58,8 @@
       min-width: 0;
     }
 
-    .visualization-subsection .demo-item img {
+    /* HUGSIM pairs: BEV and front camera keep the same displayed height. */
+    .hugsim-visualization .demo-item img {
       display: block;
       width: 100%;
       height: clamp(230px, 28vw, 320px);
@@ -62,9 +68,28 @@
       background: #ffffff;
     }
 
+    /* World-model GIFs: one wide visualization per row, preserving aspect ratio. */
+    .world-model-visualization .demo-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .world-model-visualization .demo-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 560px;
+      object-fit: contain;
+      object-position: center;
+      background: #ffffff;
+    }
+
     @media (max-width: 720px) {
-      .visualization-subsection .demo-item img {
+      .hugsim-visualization .demo-item img {
         height: 250px;
+      }
+
+      .world-model-visualization .demo-item img {
+        max-height: none;
       }
     }
   </style>
@@ -177,7 +202,7 @@
         <h2>Visualization</h2>
       </div>
 
-      <div class="visualization-subsection">
+      <div class="visualization-subsection hugsim-visualization">
         <div class="visualization-subsection-heading">
           <h3>HUGSIM Closed-Loop Testing</h3>
         </div>
@@ -207,16 +232,18 @@
             </figure>
           </div>
         </div>
+      </div>
+
+      <div class="visualization-subsection world-model-visualization">
+        <div class="visualization-subsection-heading">
+          <h3>Action-Conditioned World Model Training</h3>
+        </div>
 
         <div class="demo-category">
           <div class="demo-grid">
             <figure class="demo-item">
-              <img src="./assets/gifs/case03_baseline_bev.gif" alt="Case 3 baseline BEV" loading="lazy">
-              <figcaption>Case 3 · Baseline BEV</figcaption>
-            </figure>
-            <figure class="demo-item">
-              <img src="./assets/gifs/case03_baseline_front.gif" alt="Case 3 baseline front view" loading="lazy">
-              <figcaption>Case 3 · Baseline Front</figcaption>
+              <img src="./assets/gifs/action_conditioned_world_model_01.gif" alt="Action-conditioned world model training visualization 01" loading="lazy">
+              <figcaption>Front Camera and BEV_01</figcaption>
             </figure>
           </div>
         </div>
@@ -224,12 +251,8 @@
         <div class="demo-category">
           <div class="demo-grid">
             <figure class="demo-item">
-              <img src="./assets/gifs/case04_baseline_bev.gif" alt="Case 4 baseline BEV" loading="lazy">
-              <figcaption>Case 4 · Baseline BEV</figcaption>
-            </figure>
-            <figure class="demo-item">
-              <img src="./assets/gifs/case04_baseline_front.gif" alt="Case 4 baseline front view" loading="lazy">
-              <figcaption>Case 4 · Baseline Front</figcaption>
+              <img src="./assets/gifs/action_conditioned_world_model_02.gif" alt="Action-conditioned world model training visualization 02" loading="lazy">
+              <figcaption>Front Camera and BEV_02</figcaption>
             </figure>
           </div>
         </div>

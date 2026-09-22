@@ -2,153 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="description"
-    content="AMC: Learning redundancy-aware effective multimodality for end-to-end autonomous driving with action-conditioned predictive representations."
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AMC: Learning redundancy-aware effective multimodality for end-to-end autonomous driving with action-conditioned predictive representations.">
   <meta name="theme-color" content="#f5f6f8">
-
   <title>AMC | Redundancy-Aware Effective Multimodality</title>
-
-  <link
-    rel="icon"
-    href="./assets/images/favicon.svg"
-    type="image/svg+xml"
-  >
-
-  <link
-    rel="stylesheet"
-    href="./assets/css/style.css?v=20260715-5"
-  >
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css?v=20260715-5">
+  <style>
+    .method-summary p { margin-bottom: 0.9rem; }
+    .formula-box {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(40, 55, 80, 0.10);
+      background: #f7f9fc;
+      font-size: 1.02rem;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+    .formula-box code {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 1.02rem;
+      white-space: nowrap;
+    }
+  </style>
 </head>
-
 <body>
-
-  <!-- ===================================================== -->
-  <!-- NAVIGATION -->
-  <!-- ===================================================== -->
-
   <header class="site-header">
-
     <div class="nav-container">
-
-      <a
-        class="brand"
-        href="#top"
-        aria-label="Back to top"
-      >
-        AMC
-      </a>
-
-      <nav
-        class="nav-links"
-        aria-label="Page navigation"
-      >
+      <a class="brand" href="#top" aria-label="Back to top">AMC</a>
+      <nav class="nav-links" aria-label="Page navigation">
         <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
         <a href="#demos">Demos</a>
       </nav>
-
     </div>
-
   </header>
 
-
-  <main
-    class="page-container"
-    id="top"
-  >
-
-    <!-- ===================================================== -->
-    <!-- HERO -->
-    <!-- ===================================================== -->
-
+  <main class="page-container" id="top">
     <section class="hero-panel">
-
-      <p class="project-label">
-        Research Project Page
-      </p>
-
+      <p class="project-label">Research Project Page</p>
       <h1>
         How Many Futures Are Enough? Learning Redundancy-Aware Effective
         Multimodality for End-to-End Autonomous Driving with
         Action-Conditioned Predictive Representations
       </h1>
-
-      <p class="authors">
-        Anonymous Authors
-      </p>
-
-      <div
-        class="affiliations"
-        aria-label="Review status"
-      >
+      <p class="authors">Anonymous Authors</p>
+      <div class="affiliations" aria-label="Review status">
         <span>Paper under double-blind review</span>
       </div>
-
-      <div
-        class="resource-buttons"
-        aria-label="Project resources"
-      >
-
-        <a
-          class="resource-button primary"
-          href="./zhiji.html"
-          target="_blank"
-          rel="noopener"
-        >
-          Zhiji
-        </a>
-
-        <span
-          class="resource-button disabled"
-          aria-disabled="true"
-        >
-          arXiv soon
-        </span>
-
-        <span
-          class="resource-button disabled"
-          aria-disabled="true"
-        >
-          Code soon
-        </span>
-
+      <div class="resource-buttons" aria-label="Project resources">
+        <a class="resource-button primary" href="./zhiji.html" target="_blank" rel="noopener">Zhiji</a>
       </div>
-
     </section>
 
-
-    <!-- ===================================================== -->
-    <!-- OVERVIEW -->
-    <!-- ===================================================== -->
-
-    <section
-      class="content-panel"
-      id="overview"
-    >
-
+    <section class="content-panel" id="overview">
       <div class="section-heading">
-
         <h2>Overview</h2>
-
-        <p>
-          Scene-adaptive capacity for decision-relevant driving futures.
-        </p>
-
+        <p>Scene-adaptive capacity for decision-relevant driving futures.</p>
       </div>
-
-
       <div class="abstract-block">
-
         <h3>Abstract</h3>
-
         <p>
           Multimodal planning has become central to end-to-end autonomous
           driving because a scene may admit several plausible actions, whereas
@@ -178,17 +92,9 @@
           metric, but as targeted evidence for distinctions that geometry
           alone cannot resolve.
         </p>
-
       </div>
-
-
       <figure class="main-figure">
-
-        <img
-          src="./assets/figures/effective_multimodality_motivation.png"
-          alt="Motivation for effective multimodality"
-        >
-
+        <img src="./assets/figures/effective_multimodality_motivation.png" alt="Motivation for effective multimodality">
         <figcaption>
           <strong>Figure 1: Motivation for effective multimodality.</strong>
           Multimodal planners are needed to preserve distinct safe decisions
@@ -198,178 +104,91 @@
           consequence-equivalent candidates while retaining safety-critical
           alternatives.
         </figcaption>
-
       </figure>
-
     </section>
 
-
-    <!-- ===================================================== -->
-    <!-- DEMOS -->
-    <!-- ===================================================== -->
-
-    <section
-      class="content-panel"
-      id="demos"
-    >
-
+    <section class="content-panel" id="method">
       <div class="section-heading">
-
-        <h2>Qualitative Demos</h2>
-
+        <h2>Method</h2>
+        <p>Core architecture of AMC-Drive and its fixed-budget consequence-aware calibration.</p>
+      </div>
+      <div class="abstract-block method-summary">
+        <h3>Method Summary</h3>
         <p>
-          Representative scenario-generation and policy-control cases.
+          AMC-Drive preserves the multimodal planning backbone while introducing a frozen action-conditioned predictive representation to assess the downstream consequences of candidate futures. Based on pairwise consequence affinity, the method calibrates the fixed proposal set to reduce redundancy and preserve truly decision-relevant alternatives.
         </p>
-
+        <div class="formula-box">
+          <code>L<sub>total</sub> = L<sub>plan</sub> + λ<sub>AMC</sub>L<sub>AMC</sub> + βL<sub>cov</sub></code>
+        </div>
       </div>
-
-
-      <div class="demo-category">
-
-        <div class="demo-category-heading">
-
-          <h3>Scenario Generation</h3>
-
-          <p>
-            Logged interactions and their corresponding AMC-generated
-            high-risk variants.
-          </p>
-
-        </div>
-
-
-        <div class="demo-grid">
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/scenario_demo_06_logged.gif"
-              alt="First logged scenario"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 1 · Logged
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/scenario_demo_06_generated.gif"
-              alt="First AMC-generated scenario"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 1 · AMC Generated
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/scenario_demo_04_logged.gif"
-              alt="Second logged scenario"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 2 · Logged
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/scenario_demo_04_generated.gif"
-              alt="Second AMC-generated scenario"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 2 · AMC Generated
-            </figcaption>
-          </figure>
-
-        </div>
-
-      </div>
-
-
-      <div class="demo-category">
-
-        <div class="demo-category-heading">
-
-          <h3>Policy Rollouts</h3>
-
-          <p>
-            Nominal-only TD3 and risk-gated residual TD3 under matched
-            scenario conditions.
-          </p>
-
-        </div>
-
-
-        <div class="demo-grid">
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/policy_demo_05_nominal_only.gif"
-              alt="First baseline policy rollout"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 1 · Nominal-Only TD3
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/policy_demo_05_risk_conditioned.gif"
-              alt="First risk-gated policy rollout"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 1 · Risk-Gated TD3
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/policy_demo_06_nominal_only.gif"
-              alt="Second baseline policy rollout"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 2 · Nominal-Only TD3
-            </figcaption>
-          </figure>
-
-          <figure class="demo-item">
-            <img
-              src="./assets/gifs/policy_demo_06_risk_conditioned.gif"
-              alt="Second risk-gated policy rollout"
-              loading="lazy"
-            >
-            <figcaption>
-              Case 2 · Risk-Gated TD3
-            </figcaption>
-          </figure>
-
-        </div>
-
-      </div>
-
+      <figure class="main-figure">
+        <img src="./assets/figures/amc_drive_method_architecture.png" alt="AMC-Drive method architecture">
+        <figcaption>
+          <strong>Figure 2: AMC-Drive architecture.</strong>
+          The planner first generates a fixed set of multimodal proposals. A pretrained AC-JEPA module then evaluates their predictive consequence structure, enabling redundancy-aware calibration and yielding a cleaner, more effective multimodal output under the same proposal budget.
+        </figcaption>
+      </figure>
     </section>
 
+    <section class="content-panel" id="demos">
+      <div class="section-heading">
+        <h2>Qualitative Demos</h2>
+        <p>Representative scenario-generation and policy-control cases.</p>
+      </div>
+      <div class="demo-category">
+        <div class="demo-category-heading">
+          <h3>Scenario Generation</h3>
+          <p>Logged interactions and their corresponding AMC-generated high-risk variants.</p>
+        </div>
+        <div class="demo-grid">
+          <figure class="demo-item">
+            <img src="./assets/gifs/scenario_demo_06_logged.gif" alt="First logged scenario" loading="lazy">
+            <figcaption>Case 1 · Logged</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/scenario_demo_06_generated.gif" alt="First AMC-generated scenario" loading="lazy">
+            <figcaption>Case 1 · AMC Generated</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/scenario_demo_04_logged.gif" alt="Second logged scenario" loading="lazy">
+            <figcaption>Case 2 · Logged</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/scenario_demo_04_generated.gif" alt="Second AMC-generated scenario" loading="lazy">
+            <figcaption>Case 2 · AMC Generated</figcaption>
+          </figure>
+        </div>
+      </div>
 
+      <div class="demo-category">
+        <div class="demo-category-heading">
+          <h3>Policy Rollouts</h3>
+          <p>Nominal-only TD3 and risk-gated residual TD3 under matched scenario conditions.</p>
+        </div>
+        <div class="demo-grid">
+          <figure class="demo-item">
+            <img src="./assets/gifs/policy_demo_05_nominal_only.gif" alt="First baseline policy rollout" loading="lazy">
+            <figcaption>Case 1 · Nominal-Only TD3</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/policy_demo_05_risk_conditioned.gif" alt="First risk-gated policy rollout" loading="lazy">
+            <figcaption>Case 1 · Risk-Gated TD3</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/policy_demo_06_nominal_only.gif" alt="Second baseline policy rollout" loading="lazy">
+            <figcaption>Case 2 · Nominal-Only TD3</figcaption>
+          </figure>
+          <figure class="demo-item">
+            <img src="./assets/gifs/policy_demo_06_risk_conditioned.gif" alt="Second risk-gated policy rollout" loading="lazy">
+            <figcaption>Case 2 · Risk-Gated TD3</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
   </main>
 
-
   <footer class="footer">
-
-    <p>
-      <strong>AMC</strong>
-      · Redundancy-Aware Effective Multimodality
-    </p>
-
-
+    <p><strong>AMC</strong> · Redundancy-Aware Effective Multimodality</p>
   </footer>
-
 </body>
 </html>
-
-

@@ -3,582 +3,170 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Zhiji Driving · AMC-Drive — name, slogan, origin, philosophy, and algorithm realization.">
+  <meta name="description" content="Zhiji Driving · AMC-Drive — name, slogan, origin, and philosophical interpretation.">
   <title>知几驾驶 · AMC-Drive</title>
   <style>
     :root {
-      --bg: #f5efe2;
-      --paper: rgba(255, 250, 241, 0.9);
-      --paper-strong: rgba(255, 248, 236, 0.96);
       --ink: #1f1a17;
-      --muted: #6c6054;
-      --line: rgba(82, 67, 54, 0.18);
+      --muted: #665a50;
       --gold: #8b6b3d;
       --red: #8f2d20;
-      --shadow: 0 18px 48px rgba(41, 28, 19, 0.10);
-      --radius: 22px;
-      --radius-sm: 16px;
-      --maxw: 1180px;
+      --line: rgba(89, 71, 55, 0.14);
+      --paper: rgba(255, 251, 244, 0.78);
+      --paper-strong: rgba(255, 250, 242, 0.88);
+      --shadow: 0 16px 40px rgba(44, 32, 23, 0.08);
+      --radius: 24px;
+      --maxw: 1160px;
     }
 
     * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(143,45,32,0.08), transparent 24%),
-        radial-gradient(circle at top right, rgba(139,107,61,0.08), transparent 26%),
-        linear-gradient(180deg, #f8f2e8 0%, #f2eadc 60%, #f6f1e7 100%);
-      font-family: "Noto Serif SC", "Songti SC", "STSong", "Source Han Serif SC", Georgia, serif;
-      line-height: 1.75;
+      line-height: 1.78;
       letter-spacing: 0.02em;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.20;
-      background-image:
-        linear-gradient(rgba(70,52,39,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(70,52,39,0.045) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.55));
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", Georgia, serif;
+      background:
+        linear-gradient(rgba(250,246,239,0.78), rgba(247,241,232,0.90)),
+        url('./assets/zhiji/shanshui-paper-bg.png') center top / cover no-repeat fixed;
     }
 
     a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(calc(100% - 32px), var(--maxw));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+    .container { width: min(calc(100% - 32px), var(--maxw)); margin: 0 auto; }
 
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(12px);
-      background: rgba(248, 241, 229, 0.78);
-      border-bottom: 1px solid rgba(82,67,54,0.10);
+      background: rgba(249,244,236,0.84);
+      border-bottom: 1px solid rgba(89,71,55,0.10);
     }
 
     .site-header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      min-height: 74px;
+      min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
     }
 
-    .brand-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .brand-wrap { display: flex; align-items: center; gap: 14px; }
+    .brand-wrap img { width: 46px; height: 46px; object-fit: contain; border-radius: 10px; box-shadow: 0 10px 18px rgba(143,45,32,0.10); }
+    .brand-title { display: flex; flex-direction: column; gap: 2px; }
+    .brand-title strong { font-size: 1.06rem; letter-spacing: 0.05em; }
+    .brand-title span { font-size: 0.83rem; color: var(--muted); }
 
-    .seal {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #a83e2e, #812417);
-      color: #fff7f0;
-      box-shadow: 0 8px 20px rgba(143,45,32,0.26);
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
-
-    .brand-title {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .brand-title strong {
-      font-size: 1.05rem;
-      letter-spacing: 0.05em;
-    }
-
-    .brand-title span {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
+    .nav-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 0.95rem; }
     .nav-links a:hover { color: var(--red); }
 
-    .hero {
-      padding: 52px 0 28px;
-    }
-
+    .hero { padding: 48px 0 28px; }
     .hero-card {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(255,251,244,0.95), rgba(251,245,234,0.92));
-      border: 1px solid rgba(82,67,54,0.12);
+      padding: 34px 34px 30px;
       border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,252,247,0.82), rgba(255,248,239,0.74));
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
-      padding: 38px 34px 34px;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      right: -40px;
-      top: -40px;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(143,45,32,0.13), rgba(143,45,32,0) 68%);
-      pointer-events: none;
-    }
-
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(139,107,61,0.26);
-      background: rgba(255,255,255,0.45);
-      font-size: 0.84rem;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 4.5vw, 3.7rem);
-      line-height: 1.18;
-      letter-spacing: 0.03em;
-    }
-
-    .hero-subtitle-cn {
-      margin: 18px 0 8px;
-      font-size: clamp(1.12rem, 2.2vw, 1.38rem);
-      color: #322821;
-    }
-
-    .hero-subtitle-en {
-      margin: 0;
-      font-size: 1.02rem;
-      color: var(--muted);
-      max-width: 850px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 11px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(82,67,54,0.14);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      font-size: 0.96rem;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(52,36,24,0.10);
-      border-color: rgba(143,45,32,0.26);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #9c3526, #812417);
-      color: #fff8f1;
-      border-color: transparent;
-    }
-
-    .hero-grid {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 20px;
-    }
-
-    .quote-card, .mini-card, .panel, .artifact-box {
-      background: var(--paper);
-      border: 1px solid rgba(82,67,54,0.11);
-      border-radius: var(--radius);
-      box-shadow: 0 12px 30px rgba(41,28,19,0.06);
-    }
-
-    .quote-card { padding: 24px 24px 18px; }
-    .quote-card blockquote {
-      margin: 0;
-      font-size: 1.18rem;
-      line-height: 1.7;
-      color: #302722;
-    }
-
-    .quote-source {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .mini-grid {
-      display: grid;
-      gap: 16px;
-    }
-
-    .mini-card {
-      padding: 18px 18px 16px;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
-
-    .mini-card h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-      color: var(--red);
+    .hero-card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(143,45,32,0.08), transparent 24%);
     }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
+    .kicker {
+      display: inline-block; margin-bottom: 14px; padding: 6px 12px; border-radius: 999px;
+      border: 1px solid rgba(139,107,61,0.22); background: rgba(255,255,255,0.40); color: var(--gold); font-size: 0.84rem;
+    }
+    .hero-head {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 22px;
+    }
+    .hero-head img { width: 110px; max-width: 24vw; object-fit: contain; }
+    h1 { margin: 0; font-size: clamp(2rem, 4.2vw, 3.65rem); line-height: 1.18; }
+    .hero-subtitle-cn { margin: 18px 0 8px; font-size: clamp(1.12rem, 2.2vw, 1.34rem); color: #312821; }
+    .hero-subtitle-en { margin: 0; max-width: 840px; color: var(--muted); font-size: 1rem; }
+    .hero-buttons { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; padding: 11px 18px; border-radius: 999px;
+      border: 1px solid rgba(89,71,55,0.13); background: rgba(255,255,255,0.50); transition: .18s ease;
       font-size: 0.95rem;
     }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(44,32,23,0.08); border-color: rgba(143,45,32,0.24); }
+    .btn-primary { color: #fff7f0; background: linear-gradient(135deg, #9b3628, #812417); border-color: transparent; }
 
-    .section {
-      padding: 22px 0;
+    .hero-grid { margin-top: 28px; display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 20px; }
+    .quote-card, .mini-card, .panel {
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 12px 28px rgba(44,32,23,0.05);
     }
+    .quote-card { padding: 22px 24px 18px; }
+    .quote-card blockquote { margin: 0; font-size: 1.16rem; color: #302722; }
+    .quote-source { margin-top: 14px; font-size: 0.94rem; color: var(--muted); }
+    .mini-grid { display: grid; gap: 16px; }
+    .mini-card { padding: 18px 18px 16px; }
+    .mini-card h3 { margin: 0 0 8px; color: var(--red); font-size: 1rem; }
+    .mini-card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
-    .section-heading {
-      margin-bottom: 18px;
-    }
+    .section { padding: 22px 0; }
+    .section-heading { margin-bottom: 18px; }
+    .section-label { font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .section-heading h2 { margin: 0; font-size: clamp(1.68rem, 3vw, 2.45rem); line-height: 1.24; }
+    .section-heading p { margin: 8px 0 0; color: var(--muted); }
+    .panel { padding: 26px 24px; }
 
-    .section-label {
-      color: var(--gold);
-      font-size: 0.88rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      line-height: 1.24;
-    }
-
-    .section-heading p {
-      margin: 8px 0 0;
-      color: var(--muted);
-    }
-
-    .panel {
-      padding: 26px 24px;
-    }
-
-    .bilingual-grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .bilingual-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
+    .bilingual-grid { display: grid; gap: 18px; }
+    .bilingual-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .lang-card {
-      padding: 18px 18px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(82,67,54,0.09);
-      background: rgba(255,255,255,0.42);
-      min-height: 100%;
+      padding: 18px 18px 16px; min-height: 100%; border-radius: 18px;
+      background: rgba(255,255,255,0.46); border: 1px solid rgba(89,71,55,0.10);
     }
-
     .lang-tag {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      background: rgba(139,107,61,0.10);
-      color: var(--gold);
-      letter-spacing: 0.08em;
+      display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 999px;
+      font-size: 0.78rem; letter-spacing: 0.08em; background: rgba(139,107,61,0.10); color: var(--gold);
     }
+    .lang-card p { margin: 0; }
 
-    .lang-card p {
-      margin: 0;
-    }
-
-    .insight-list {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
+    .insight-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
     .insight {
-      padding: 18px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(82,67,54,0.10);
-      background: rgba(255,255,255,0.44);
+      padding: 18px 16px; border-radius: 18px; border: 1px solid rgba(89,71,55,0.10); background: rgba(255,255,255,0.45);
     }
+    .insight strong { display: block; margin-bottom: 6px; color: var(--red); font-size: 1rem; }
+    .insight span { display: block; color: var(--muted); font-size: 0.93rem; }
 
-    .insight strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 6px;
-      color: var(--red);
-    }
-
-    .insight span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 10px;
-      align-items: stretch;
-    }
-
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 14px; margin-top: 10px; }
     .flow-card {
-      position: relative;
-      padding: 18px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(82,67,54,0.10);
-      background: rgba(255,255,255,0.46);
-      min-height: 170px;
+      position: relative; min-height: 170px; padding: 18px 16px; border-radius: 18px;
+      border: 1px solid rgba(89,71,55,0.10); background: rgba(255,255,255,0.46);
     }
-
     .flow-card:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -11px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gold);
-      font-size: 1.2rem;
-      font-weight: 700;
-      z-index: 2;
+      content: "→"; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 1.2rem; font-weight: 700;
     }
-
     .flow-index {
-      display: inline-flex;
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      align-items: center;
-      justify-content: center;
-      background: rgba(143,45,32,0.10);
-      color: var(--red);
-      font-weight: 700;
-      margin-bottom: 10px;
+      display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px;
+      background: rgba(143,45,32,0.10); color: var(--red); font-weight: 700; margin-bottom: 10px;
     }
+    .flow-card h3 { margin: 0 0 8px; font-size: 1rem; line-height: 1.4; }
+    .flow-card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
 
-    .flow-card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-
-    .flow-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .tech-card {
-      padding: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(82,67,54,0.09);
-      background: rgba(255,255,255,0.44);
-    }
-
-    .tech-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.02rem;
-      color: #3a2c20;
-    }
-
-    .tech-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .code-box {
-      margin-top: 12px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(82,67,54,0.10);
-      background: rgba(61,44,31,0.92);
-      color: #f6ecde;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.9rem;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
+    .philosophy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 18px; }
     .philo-card {
-      padding: 18px 16px;
-      border-radius: 18px;
+      padding: 18px 16px; border-radius: 18px; border: 1px solid rgba(89,71,55,0.10);
       background: linear-gradient(180deg, rgba(255,255,255,0.54), rgba(255,248,238,0.84));
-      border: 1px solid rgba(82,67,54,0.10);
     }
+    .philo-card h3 { margin: 0 0 8px; color: var(--red); font-size: 1rem; }
+    .philo-card p { margin: 0; color: var(--muted); font-size: 0.93rem; }
 
-    .philo-card h3 {
-      margin: 0 0 8px;
-      color: var(--red);
-      font-size: 1rem;
-    }
-
-    .philo-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .artifact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .artifact-box {
-      padding: 18px;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.52), rgba(253,248,239,0.92)),
-        radial-gradient(circle at top right, rgba(143,45,32,0.06), transparent 36%);
-    }
-
-    .artifact-box h3 {
-      margin: 0 0 10px;
-      font-size: 1rem;
-      color: #3a2c20;
-    }
-
-    .artifact-box p, .artifact-box li {
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .artifact-box ul {
-      margin: 10px 0 0 18px;
-      padding: 0;
-    }
-
-    .artifact-box .placeholder {
-      margin-top: 12px;
-      border-radius: 16px;
-      min-height: 94px;
-      border: 1px dashed rgba(139,107,61,0.38);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      background: rgba(255,255,255,0.35);
-      text-align: center;
-      padding: 14px;
-      font-size: 0.92rem;
-    }
-
-    .footer {
-      padding: 30px 0 50px;
-      color: var(--muted);
-    }
-
+    .footer { padding: 30px 0 50px; color: var(--muted); }
     .footer-card {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 18px 20px;
-      border: 1px solid rgba(82,67,54,0.10);
-      border-radius: 20px;
-      background: rgba(255,255,255,0.44);
+      display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap;
+      padding: 18px 20px; border-radius: 20px; border: 1px solid rgba(89,71,55,0.10); background: rgba(255,255,255,0.46);
     }
-
-    .footer small {
-      display: block;
-      color: var(--muted);
-      margin-top: 3px;
-    }
+    .footer small { display: block; margin-top: 3px; }
 
     @media (max-width: 1024px) {
-      .hero-grid,
-      .bilingual-row,
-      .tech-grid,
-      .artifact-grid,
-      .insight-list,
-      .philosophy-grid,
-      .flow {
-        grid-template-columns: 1fr;
-      }
-
-      .flow-card:not(:last-child)::after {
-        content: "↓";
-        right: 50%;
-        top: auto;
-        bottom: -14px;
-        transform: translateX(50%);
-      }
+      .hero-grid, .bilingual-row, .insight-list, .philosophy-grid, .flow { grid-template-columns: 1fr; }
+      .flow-card:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -14px; transform: translateX(50%); }
     }
-
-    @media (max-width: 740px) {
-      .site-header-inner {
-        align-items: flex-start;
-        padding: 12px 0;
-      }
-
-      .nav-links { gap: 10px 14px; }
+    @media (max-width: 720px) {
+      .site-header-inner { padding: 12px 0; align-items: flex-start; }
       .hero-card { padding: 28px 22px 24px; }
-      .panel { padding: 22px 18px; }
-      .quote-card, .mini-card, .lang-card, .flow-card, .tech-card, .philo-card, .artifact-box { padding: 16px; }
+      .hero-head { flex-direction: column; }
+      .hero-head img { width: 92px; }
+      .panel, .quote-card, .mini-card, .lang-card, .flow-card, .philo-card { padding: 16px; }
     }
   </style>
 </head>
@@ -586,7 +174,7 @@
   <header class="site-header">
     <div class="container site-header-inner">
       <a class="brand-wrap" href="#top" aria-label="Back to top">
-        <div class="seal">知几</div>
+        <img src="./assets/zhiji/zhiji-seal.png" alt="Zhiji seal">
         <div class="brand-title">
           <strong>知几驾驶 · AMC-Drive</strong>
           <span>Zhiji Driving · Redundancy-Aware Effective Multimodality</span>
@@ -595,9 +183,7 @@
       <nav class="nav-links" aria-label="Page navigation">
         <a href="#origin">名称与出处</a>
         <a href="#method">方法主线</a>
-        <a href="#implementation">算法实现</a>
         <a href="#philosophy">哲学思考</a>
-        <a href="#materials">素材建议</a>
       </nav>
     </div>
   </header>
@@ -607,12 +193,16 @@
       <div class="container">
         <div class="hero-card">
           <div class="kicker">Project Interpretation Page · 项目阐释页</div>
-          <h1>知几驾驶 · AMC-Drive</h1>
-          <p class="hero-subtitle-cn">辨其同，存其异；不求多，而求当。<br>How Many Futures Are Enough?</p>
-          <p class="hero-subtitle-en">A bilingual concept page for the AMC-Drive project, focusing on the name, slogan, philosophical origin, and the core algorithmic realization behind consequence-aware effective multimodality in autonomous driving.</p>
+          <div class="hero-head">
+            <div>
+              <h1>知几驾驶 · AMC-Drive</h1>
+              <p class="hero-subtitle-cn">辨其同，存其异；不求多，而求当。<br>How Many Futures Are Enough?</p>
+              <p class="hero-subtitle-en">A bilingual concept page for the AMC-Drive project, focusing on the name, slogan, classical origin, methodological intuition, and the philosophical meaning of effective multimodality.</p>
+            </div>
+            <img src="./assets/zhiji/zhiji-seal.png" alt="Zhiji seal">
+          </div>
           <div class="hero-buttons">
             <a class="btn btn-primary" href="./index.html">返回项目主页 / Back to Main Page</a>
-            <a class="btn" href="#implementation">查看算法实现 / View Method Realization</a>
           </div>
 
           <div class="hero-grid">
@@ -622,11 +212,10 @@
                 <span style="font-size:0.95rem;color:var(--muted);">——《周易》</span>
               </blockquote>
               <div class="quote-source">
-                在自动驾驶中，真正关键的，并不是机械地增加候选轨迹数量，而是辨认那些看似细微、却会导向不同后果的未来差异。<br>
-                In autonomous driving, the central challenge is not to mechanically increase the number of trajectories, but to identify subtle variations that truly lead to different future consequences.
+                在自动驾驶中，关键不在机械地增加轨迹数量，而在辨认那些看似细微、却会导向不同后果的未来差异。<br>
+                In autonomous driving, the essential challenge is not to mechanically enlarge the number of trajectories, but to perceive subtle differences that truly lead to different future consequences.
               </div>
             </div>
-
             <div class="mini-grid">
               <div class="mini-card">
                 <h3>项目题语 / Project Slogan</h3>
@@ -634,11 +223,11 @@
               </div>
               <div class="mini-card">
                 <h3>核心问题 / Core Question</h3>
-                <p>How many futures are enough?<br>在固定的多模态预算下，哪些 future 是冗余的，哪些 future 值得被保留？</p>
+                <p>How Many Futures Are Enough?<br>在固定的多模态预算下，哪些 future 是冗余的，哪些 future 值得被保留？</p>
               </div>
               <div class="mini-card">
                 <h3>页面用途 / Page Role</h3>
-                <p>本页用于补充中文命名、方法解释与哲学思考，不替代论文主页，也不干扰原有项目页结构。<br>This page complements the paper page with naming, interpretation, and bilingual exposition.</p>
+                <p>本页用于补充中文命名、方法解释与哲学思考，不替代论文主页，也不干扰原有项目页结构。<br>This page complements the project homepage with naming, interpretation, and bilingual exposition.</p>
               </div>
             </div>
           </div>
@@ -665,41 +254,28 @@
               <div class="lang-card">
                 <span class="lang-tag">English</span>
                 <p><strong>Name:</strong> Zhiji Driving · AMC-Drive</p>
-                <p>The term <em>Zhiji</em> is inspired by the line from the <em>Book of Changes</em>: “To perceive the subtle incipient sign is close to the divine.” Here, the subtle sign is not a grand final outcome, but the barely emerging difference that may later produce a decisively different consequence. In autonomous driving, different trajectories do not necessarily imply different futures; what matters is whether one can detect the key divergence hidden beneath geometric similarity.</p>
+                <p>The term <em>Zhiji</em> is inspired by the line from the <em>Book of Changes</em>: “To perceive the subtle incipient sign is close to the divine.” In this page, the subtle sign means the tiny divergence that may later produce a decisively different consequence. Different trajectories do not necessarily imply different futures; what matters is whether the method can detect the key divergence hidden beneath geometric similarity.</p>
               </div>
             </div>
-
             <div class="bilingual-row">
               <div class="lang-card">
                 <span class="lang-tag">中文</span>
                 <p><strong>题语：</strong>辨其同，存其异；不求多，而求当。</p>
-                <p>此句取意于《论语》“和而不同”与《中庸》“执其两端，用其中于民”。在 AMC-Drive 中，这句题语并非装饰性的文学点缀，而是方法思想的直接表达：面对固定预算的多模态输出，不应将所有几何差异都等同为有价值的 future，也不应因局部相似而粗暴合并那些后果不同的候选。</p>
+                <p>此句取意于《论语》“和而不同”与《中庸》“执其两端，用其中于民”。在 AMC-Drive 中，这并非装饰性的文学点缀，而是方法思想的直接表达：面对固定预算的多模态输出，不应将所有几何差异都等同为有价值的 future，也不应因局部相似而粗暴合并那些后果不同的候选。</p>
               </div>
               <div class="lang-card">
                 <span class="lang-tag">English</span>
                 <p><strong>Slogan:</strong> Distinguish what is effectively the same, preserve what is truly different; seek not more, but what is appropriate.</p>
-                <p>The slogan draws on the spirit of the <em>Analects</em> and the <em>Doctrine of the Mean</em>. In AMC-Drive, it directly mirrors the method design: under a fixed multimodal budget, we should neither mistake every geometric variation for a meaningful future, nor merge together candidates whose downstream consequences remain importantly different.</p>
+                <p>The slogan echoes the spirit of the <em>Analects</em> and the <em>Doctrine of the Mean</em>. Under a fixed multimodal budget, AMC-Drive should neither mistake every geometric variation for a meaningful future, nor merge together candidates whose downstream consequences remain importantly different.</p>
               </div>
             </div>
           </div>
 
           <div class="insight-list">
-            <div class="insight">
-              <strong>辨其同</strong>
-              <span>识别 consequence-equivalent proposals，而不是把每一个坐标扰动都当作独立未来。</span>
-            </div>
-            <div class="insight">
-              <strong>存其异</strong>
-              <span>保留 interaction timing、collision margin、progress 等后果层面真正不同的候选。</span>
-            </div>
-            <div class="insight">
-              <strong>不求多</strong>
-              <span>不盲目追求更大的候选数量，而是尊重固定预算中的结构组织问题。</span>
-            </div>
-            <div class="insight">
-              <strong>而求当</strong>
-              <span>追求与场景复杂度相称、对决策真正有用的有效多模态。</span>
-            </div>
+            <div class="insight"><strong>辨其同</strong><span>识别 consequence-equivalent proposals，而不是把每一个坐标扰动都当作独立未来。</span></div>
+            <div class="insight"><strong>存其异</strong><span>保留 interaction timing、collision margin、progress 等后果层面真正不同的候选。</span></div>
+            <div class="insight"><strong>不求多</strong><span>不盲目追求更大的候选数量，而是尊重固定预算中的结构组织问题。</span></div>
+            <div class="insight"><strong>而求当</strong><span>追求与场景复杂度相称、对决策真正有用的有效多模态。</span></div>
           </div>
         </div>
       </div>
@@ -712,121 +288,23 @@
           <h2>方法主线 / Method Mainline</h2>
           <p>从“生成更多轨迹”转向“更好地使用固定预算的候选容量”。</p>
         </div>
-
         <div class="panel">
           <div class="bilingual-row" style="margin-bottom: 16px;">
             <div class="lang-card">
               <span class="lang-tag">中文</span>
-              <p>AMC-Drive 关注的不是名义上有多少条轨迹，而是在固定的候选预算中，到底有多少条 future 在后果层面是有效区分的。方法将每一条候选轨迹视为一条待验证的 action，然后借助冻结的动作条件预测表征观察其未来 consequences，通过候选之间的 consequence affinity 估计冗余关系，再用辅助校准目标重组织 proposal set，使固定预算更集中地承载真正不同的决策机会。</p>
+              <p>AMC-Drive 关注的不是名义上有多少条轨迹，而是在固定的候选预算中，到底有多少条 future 在后果层面是有效区分的。方法将每一条候选轨迹视为一条待验证的 action，然后借助冻结的动作条件预测表征观察其 future consequences，通过候选之间的 consequence affinity 估计冗余关系，再用辅助校准目标重组织 proposal set，使固定预算更集中地承载真正不同的决策机会。</p>
             </div>
             <div class="lang-card">
               <span class="lang-tag">English</span>
-              <p>AMC-Drive does not simply ask how many trajectories are produced. Instead, it asks how many of those trajectories correspond to genuinely distinct future consequences under a fixed proposal budget. Each candidate trajectory is treated as an action to be verified. A frozen action-conditioned predictive representation is used to inspect its future consequences, pairwise consequence affinity reveals redundancy structure, and an auxiliary calibration objective reorganizes the proposal set so that the same nominal budget can better represent decision-relevant opportunities.</p>
+              <p>AMC-Drive asks not how many trajectories are produced, but how many of them correspond to genuinely distinct future consequences under a fixed proposal budget. Each candidate trajectory is treated as an action to be verified. A frozen action-conditioned predictive representation inspects its future consequences, pairwise consequence affinity reveals redundancy structure, and an auxiliary calibration objective reorganizes the proposal set so that the same budget can better represent decision-relevant opportunities.</p>
             </div>
           </div>
-
           <div class="flow" aria-label="AMC-Drive mainline flow">
-            <div class="flow-card">
-              <div class="flow-index">1</div>
-              <h3>Scene Context<br>场景上下文</h3>
-              <p>输入包含视觉、BEV 与 ego 状态等场景信息，形成当前驾驶语境。</p>
-            </div>
-            <div class="flow-card">
-              <div class="flow-index">2</div>
-              <h3>Candidate Futures<br>候选未来生成</h3>
-              <p>模型在固定预算下生成多条候选轨迹，作为待分析的潜在未来。</p>
-            </div>
-            <div class="flow-card">
-              <div class="flow-index">3</div>
-              <h3>Predictive Evidence<br>预测后果证据</h3>
-              <p>冻结的 action-conditioned predictive representation 对每个候选动作进行多时域 future rollout。</p>
-            </div>
-            <div class="flow-card">
-              <div class="flow-index">4</div>
-              <h3>Affinity Topology<br>相似拓扑建模</h3>
-              <p>由 pairwise consequence affinity 构建关系图，识别冗余与不可合并的关键差异。</p>
-            </div>
-            <div class="flow-card">
-              <div class="flow-index">5</div>
-              <h3>Calibrated Selection Opportunity<br>经校准的决策机会</h3>
-              <p>在不改变输出预算的前提下，重组织 proposal topology，为后续 scorer 提供更优候选机会。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="implementation">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-label">Algorithm Realization</div>
-          <h2>算法实现 / Algorithm Realization</h2>
-          <p>核心讲述 AMC-Drive 自身的实现逻辑，不将重点放在与其他方法的比较上。</p>
-        </div>
-
-        <div class="panel">
-          <div class="tech-grid">
-            <div class="tech-card">
-              <h3>Fixed Proposal Capacity / 固定候选容量</h3>
-              <p>AMC-Drive 维持固定候选预算，并把这个预算视作可被“组织”和“校准”的结构对象，而不仅仅是一个静态的数量参数。方法关注的是：在相同预算内，候选之间的关系是否更合理、是否能更好承载不同决策机会。</p>
-              <div class="code-box">proposal_num = 32
-num_poses = 8
-proposal tensor ≈ [B, 32, 8, 3]</div>
-            </div>
-
-            <div class="tech-card">
-              <h3>Trajectory Proposal Stack / 候选轨迹栈</h3>
-              <p>候选轨迹通过 proposal-slot embedding 与场景特征共同驱动，在多阶段共享 refinement 中逐步更新。最终，系统既保留多模态输出接口，又为后续 consequence-aware analysis 留出结构化候选空间。</p>
-              <div class="code-box">camera / BEV features + ego status
-        ↓
-init_feature (proposal-slot embeddings)
-        ↓
-4 shared refinement stages
-        ↓
-multi-proposal trajectory layers</div>
-            </div>
-
-            <div class="tech-card">
-              <h3>Frozen Predictive Representation / 冻结预测表征</h3>
-              <p>每一条候选轨迹都被视为一个条件动作。方法并不只看轨迹在坐标空间中的差异，而是将其送入冻结的动作条件预测表征中，考察它在多个 latent horizon 上所诱导的 future consequence evidence。</p>
-              <div class="code-box">candidate trajectory
-      → candidate action
-      → frozen action-conditioned predictor
-      → multi-horizon future consequence evidence</div>
-            </div>
-
-            <div class="tech-card">
-              <h3>Consequence Affinity Graph / 后果相似图</h3>
-              <p>对于任意两个候选，AMC-Drive 计算它们在预测表征空间中的 consequence affinity，并由此构建 pairwise relation graph。几何上接近的轨迹若在后果上仍然不同，就不会被误判为可随意合并；反之，后果近似的候选会被识别为冗余关系。</p>
-              <div class="code-box">candidate i, candidate j
-      → predictive evidence comparison
-      → pairwise consequence affinity
-      → topology-aware relation graph</div>
-            </div>
-
-            <div class="tech-card">
-              <h3>Calibration Objective / 校准目标</h3>
-              <p>AMC-Drive 的训练目标不是简单删除候选，而是在固定预算下校准有效多模态。一个目标控制整体 affinity mass 的规模，另一个目标控制 topology 的组织方式，从而使 proposal set 更集中地表达真正不同的 planning choices。</p>
-              <div class="code-box">L_AMC = L_plan + λ_K · L_K + λ_T · L_topo</div>
-            </div>
-
-            <div class="tech-card">
-              <h3>Decision Interface / 决策接口</h3>
-              <p>在部署时，系统仍然从候选集合中选出一条最终轨迹。AMC-Drive 的价值不在于改变“选一条”的最终形式，而在于提升被送入选择器的候选质量与结构，使决策接口获得更清晰、更少冗余、但又不丢失关键差异的机会集合。</p>
-              <div class="code-box">Scorer → candidate score logits
-argmax → selected trajectory</div>
-            </div>
-          </div>
-
-          <div class="bilingual-row" style="margin-top: 16px;">
-            <div class="lang-card">
-              <span class="lang-tag">中文</span>
-              <p><strong>一句话概括：</strong>AMC-Drive 不是追求“更多轨迹”，而是通过冻结动作条件预测表征与 consequence-affinity topology calibration，让固定预算中的候选集合更有效地区分真正不同的未来。</p>
-            </div>
-            <div class="lang-card">
-              <span class="lang-tag">English</span>
-              <p><strong>One-sentence summary:</strong> AMC-Drive is not about producing more trajectories; it is about using frozen action-conditioned predictive representations and consequence-affinity topology calibration to make a fixed proposal budget better separate truly different futures.</p>
-            </div>
+            <div class="flow-card"><div class="flow-index">1</div><h3>Scene Context<br>场景上下文</h3><p>输入视觉、BEV 与 ego 状态等信息，形成当前驾驶语境。</p></div>
+            <div class="flow-card"><div class="flow-index">2</div><h3>Candidate Futures<br>候选未来生成</h3><p>模型在固定预算下生成多条候选轨迹，作为待分析的潜在 future。</p></div>
+            <div class="flow-card"><div class="flow-index">3</div><h3>Predictive Evidence<br>预测后果证据</h3><p>冻结的动作条件预测表征对每个候选动作进行多时域 future rollout。</p></div>
+            <div class="flow-card"><div class="flow-index">4</div><h3>Affinity Topology<br>相似拓扑建模</h3><p>由 pairwise consequence affinity 构建关系图，识别冗余与不可合并的关键差异。</p></div>
+            <div class="flow-card"><div class="flow-index">5</div><h3>Calibrated Opportunity<br>经校准的决策机会</h3><p>在不改变输出预算的前提下，重组织 proposal topology，为后续 scorer 提供更优候选机会。</p></div>
           </div>
         </div>
       </div>
@@ -839,86 +317,16 @@ argmax → selected trajectory</div>
           <h2>哲学思考 / Philosophical Reflection</h2>
           <p>让中文命名、项目题语与算法结构形成一一对应。</p>
         </div>
-
         <div class="panel">
           <div class="philosophy-grid">
-            <div class="philo-card">
-              <h3>知几 / Perceiving the Subtle</h3>
-              <p>方法关注“几何上看似相近、后果上却开始分化”的微妙未来差异；这正是“知几”在现代算法中的技术对应。</p>
-            </div>
-            <div class="philo-card">
-              <h3>辨其同 / Distinguishing Sameness</h3>
-              <p>许多候选只是名义上的多模态，却在后果层面近乎可互换。识别这种同，是减少无效冗余的前提。</p>
-            </div>
-            <div class="philo-card">
-              <h3>存其异 / Preserving Difference</h3>
-              <p>安全相关、决策相关的 future 不应因局部几何接近而被合并。存其异，是对真正 planning choice 的保留。</p>
-            </div>
-            <div class="philo-card">
-              <h3>不求多，而求当 / Not More, but Appropriate</h3>
-              <p>多模态的价值不在表面数量，而在与场景复杂度相匹配、与下游决策真正相关的有效容量。</p>
-            </div>
+            <div class="philo-card"><h3>知几 / Perceiving the Subtle</h3><p>方法关注“几何上看似相近、后果上却开始分化”的微妙未来差异；这正是“知几”在现代算法中的技术对应。</p></div>
+            <div class="philo-card"><h3>辨其同 / Distinguishing Sameness</h3><p>许多候选只是名义上的多模态，却在后果层面近乎可互换。识别这种同，是减少无效冗余的前提。</p></div>
+            <div class="philo-card"><h3>存其异 / Preserving Difference</h3><p>安全相关、决策相关的 future 不应因局部几何接近而被合并。存其异，是对真正 planning choice 的保留。</p></div>
+            <div class="philo-card"><h3>不求多，而求当 / Not More, but Appropriate</h3><p>多模态的价值不在表面数量，而在与场景复杂度相匹配、与下游决策真正相关的有效容量。</p></div>
           </div>
-
           <div class="bilingual-row" style="margin-top: 18px;">
-            <div class="lang-card">
-              <span class="lang-tag">中文</span>
-              <p>因此，“知几驾驶”并不是一个独立于技术之外的文学包装，而是对 AMC-Drive 方法论的另一种凝练表述：在固定预算的多模态规划中，我们追求的不是表面繁复，而是对关键未来差异的准确感知、合理组织与审慎保留。</p>
-            </div>
-            <div class="lang-card">
-              <span class="lang-tag">English</span>
-              <p>For this reason, Zhiji Driving is not a decorative literary wrapper placed outside the method. It is a concise conceptual restatement of AMC-Drive itself: under a fixed multimodal planning budget, the goal is not superficial abundance, but precise perception, principled organization, and careful preservation of decision-relevant future differences.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="materials">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-label">Recommended Materials</div>
-          <h2>可选素材建议 / Optional Visual Material Suggestions</h2>
-          <p>本页无需额外图片即可运行；如果你想进一步强化古风特色，可以按下述建议补充素材。</p>
-        </div>
-
-        <div class="panel">
-          <div class="artifact-grid">
-            <div class="artifact-box">
-              <div>
-                <h3>01 · 宣纸 / 水墨背景</h3>
-                <p>建议寻找浅色宣纸纹理、淡墨晕染、或留白较多的古风背景图，用作局部横幅或 section 背景。尽量轻纹理、低对比，避免压住正文可读性。</p>
-                <ul>
-                  <li>关键词：rice paper texture / ink wash background / xuan paper</li>
-                  <li>推荐来源：Wikimedia Commons、The Met Open Access、Openverse</li>
-                </ul>
-              </div>
-              <div class="placeholder">可放置于：<br><strong>./assets/zhiji/bg-paper.*</strong></div>
-            </div>
-
-            <div class="artifact-box">
-              <div>
-                <h3>02 · 印章 / 篆刻元素</h3>
-                <p>建议准备一枚简化的“知几”印章图，或一张红色方形印记纹理，用在页首标题附近，与古典气质形成视觉锚点。</p>
-                <ul>
-                  <li>关键词：seal stamp texture / Chinese seal / red stamp</li>
-                  <li>推荐来源：自行设计 SVG、公开可商用矢量素材、Openverse</li>
-                </ul>
-              </div>
-              <div class="placeholder">可放置于：<br><strong>./assets/zhiji/seal-zhiji.*</strong></div>
-            </div>
-
-            <div class="artifact-box">
-              <div>
-                <h3>03 · 方法示意 / Algorithm Figure</h3>
-                <p>最值得补充的图片仍然是你自己的方法图，例如：scene → proposals → predictive evidence → affinity topology → calibrated opportunity。建议使用与你论文中一致的图形语言。</p>
-                <ul>
-                  <li>关键词：AMC-Drive pipeline / multimodal planning figure</li>
-                  <li>推荐做法：直接放你自己的论文图或重绘后的简洁版本</li>
-                </ul>
-              </div>
-              <div class="placeholder">可放置于：<br><strong>./assets/zhiji/amc-pipeline.png</strong></div>
-            </div>
+            <div class="lang-card"><span class="lang-tag">中文</span><p>因此，“知几驾驶”并不是一个独立于技术之外的文学包装，而是对 AMC-Drive 方法论的另一种凝练表述：在固定预算的多模态规划中，我们追求的不是表面繁复，而是对关键未来差异的准确感知、合理组织与审慎保留。</p></div>
+            <div class="lang-card"><span class="lang-tag">English</span><p>For this reason, Zhiji Driving is not merely a literary wrapper outside the method. It is a compact restatement of AMC-Drive itself: under a fixed multimodal planning budget, the goal is not superficial abundance, but precise perception, principled organization, and careful preservation of decision-relevant future differences.</p></div>
           </div>
         </div>
       </div>
@@ -931,9 +339,7 @@ argmax → selected trajectory</div>
         <strong>知几驾驶 · AMC-Drive</strong>
         <small>辨其同，存其异；不求多，而求当。</small>
       </div>
-      <div>
-        <a class="btn" href="./index.html">Back to Main Project Page</a>
-      </div>
+      <div><a class="btn" href="./index.html">Back to Main Project Page</a></div>
     </div>
   </footer>
 </body>

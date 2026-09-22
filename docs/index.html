@@ -25,6 +25,48 @@
       font-size: 1.02rem;
       white-space: nowrap;
     }
+
+    /* Visualization: keep BEV and front-view GIFs equal in displayed height
+       while preserving each GIF's native aspect ratio without cropping. */
+    .visualization-subsection {
+      margin-top: 1.25rem;
+    }
+
+    .visualization-subsection-heading {
+      margin-bottom: 1.1rem;
+    }
+
+    .visualization-subsection-heading h3 {
+      margin: 0;
+      font-size: 1.24rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .visualization-subsection .demo-category {
+      margin-top: 1.1rem;
+    }
+
+    .visualization-subsection .demo-item {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .visualization-subsection .demo-item img {
+      display: block;
+      width: 100%;
+      height: clamp(230px, 28vw, 320px);
+      object-fit: contain;
+      object-position: center;
+      background: #ffffff;
+    }
+
+    @media (max-width: 720px) {
+      .visualization-subsection .demo-item img {
+        height: 250px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -135,55 +177,61 @@
         <h2>Visualization</h2>
       </div>
 
-      <div class="demo-category">
-        <div class="demo-grid">
-          <figure class="demo-item">
-            <img src="./assets/gifs/case01_baseline_bev.gif" alt="Case 1 baseline BEV" loading="lazy">
-            <figcaption>Case 1 · Baseline BEV</figcaption>
-          </figure>
-          <figure class="demo-item">
-            <img src="./assets/gifs/case01_baseline_front.gif" alt="Case 1 baseline front view" loading="lazy">
-            <figcaption>Case 1 · Baseline Front</figcaption>
-          </figure>
+      <div class="visualization-subsection">
+        <div class="visualization-subsection-heading">
+          <h3>HUGSIM Closed-Loop Testing</h3>
         </div>
-      </div>
 
-      <div class="demo-category">
-        <div class="demo-grid">
-          <figure class="demo-item">
-            <img src="./assets/gifs/case02_baseline_bev.gif" alt="Case 2 baseline BEV" loading="lazy">
-            <figcaption>Case 2 · Baseline BEV</figcaption>
-          </figure>
-          <figure class="demo-item">
-            <img src="./assets/gifs/case02_baseline_front.gif" alt="Case 2 baseline front view" loading="lazy">
-            <figcaption>Case 2 · Baseline Front</figcaption>
-          </figure>
+        <div class="demo-category">
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <img src="./assets/gifs/case01_baseline_bev.gif" alt="Case 1 baseline BEV" loading="lazy">
+              <figcaption>Case 1 · Baseline BEV</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <img src="./assets/gifs/case01_baseline_front.gif" alt="Case 1 baseline front view" loading="lazy">
+              <figcaption>Case 1 · Baseline Front</figcaption>
+            </figure>
+          </div>
         </div>
-      </div>
 
-      <div class="demo-category">
-        <div class="demo-grid">
-          <figure class="demo-item">
-            <img src="./assets/gifs/case03_baseline_bev.gif" alt="Case 3 baseline BEV" loading="lazy">
-            <figcaption>Case 3 · Baseline BEV</figcaption>
-          </figure>
-          <figure class="demo-item">
-            <img src="./assets/gifs/case03_baseline_front.gif" alt="Case 3 baseline front view" loading="lazy">
-            <figcaption>Case 3 · Baseline Front</figcaption>
-          </figure>
+        <div class="demo-category">
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <img src="./assets/gifs/case02_baseline_bev.gif" alt="Case 2 baseline BEV" loading="lazy">
+              <figcaption>Case 2 · Baseline BEV</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <img src="./assets/gifs/case02_baseline_front.gif" alt="Case 2 baseline front view" loading="lazy">
+              <figcaption>Case 2 · Baseline Front</figcaption>
+            </figure>
+          </div>
         </div>
-      </div>
 
-      <div class="demo-category">
-        <div class="demo-grid">
-          <figure class="demo-item">
-            <img src="./assets/gifs/case04_baseline_bev.gif" alt="Case 4 baseline BEV" loading="lazy">
-            <figcaption>Case 4 · Baseline BEV</figcaption>
-          </figure>
-          <figure class="demo-item">
-            <img src="./assets/gifs/case04_baseline_front.gif" alt="Case 4 baseline front view" loading="lazy">
-            <figcaption>Case 4 · Baseline Front</figcaption>
-          </figure>
+        <div class="demo-category">
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <img src="./assets/gifs/case03_baseline_bev.gif" alt="Case 3 baseline BEV" loading="lazy">
+              <figcaption>Case 3 · Baseline BEV</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <img src="./assets/gifs/case03_baseline_front.gif" alt="Case 3 baseline front view" loading="lazy">
+              <figcaption>Case 3 · Baseline Front</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="demo-category">
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <img src="./assets/gifs/case04_baseline_bev.gif" alt="Case 4 baseline BEV" loading="lazy">
+              <figcaption>Case 4 · Baseline BEV</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <img src="./assets/gifs/case04_baseline_front.gif" alt="Case 4 baseline front view" loading="lazy">
+              <figcaption>Case 4 · Baseline Front</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>

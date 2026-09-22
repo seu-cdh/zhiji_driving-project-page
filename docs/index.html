@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="AMC: Learning redundancy-aware effective multimodality for end-to-end autonomous driving with action-conditioned predictive representations."
+  >
+
+  <meta name="theme-color" content="#f5f6f8">
+
+  <title>AMC | Redundancy-Aware Effective Multimodality</title>
+
+  <link
+    rel="icon"
+    href="./assets/images/favicon.svg"
+    type="image/svg+xml"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./assets/css/style.css?v=20260715-5"
+  >
+</head>
+
+<body>
+
+  <!-- ===================================================== -->
+  <!-- NAVIGATION -->
+  <!-- ===================================================== -->
+
+  <header class="site-header">
+
+    <div class="nav-container">
+
+      <a
+        class="brand"
+        href="#top"
+        aria-label="Back to top"
+      >
+        AMC
+      </a>
+
+      <nav
+        class="nav-links"
+        aria-label="Page navigation"
+      >
+        <a href="#overview">Overview</a>
+        <a href="#demos">Demos</a>
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <main
+    class="page-container"
+    id="top"
+  >
+
+    <!-- ===================================================== -->
+    <!-- HERO -->
+    <!-- ===================================================== -->
+
+    <section class="hero-panel">
+
+      <p class="project-label">
+        Research Project Page
+      </p>
+
+      <h1>
+        How Many Futures Are Enough? Learning Redundancy-Aware Effective
+        Multimodality for End-to-End Autonomous Driving with
+        Action-Conditioned Predictive Representations
+      </h1>
+
+      <p class="authors">
+        Anonymous Authors
+      </p>
+
+      <div
+        class="affiliations"
+        aria-label="Review status"
+      >
+        <span>Paper under double-blind review</span>
+      </div>
+
+      <div
+        class="resource-buttons"
+        aria-label="Project resources"
+      >
+
+        <a
+          class="resource-button primary"
+          href="./assets/paper/main.pdf"
+          target="_blank"
+          rel="noopener"
+        >
+          Paper
+        </a>
+
+        <span
+          class="resource-button disabled"
+          aria-disabled="true"
+        >
+          arXiv soon
+        </span>
+
+        <span
+          class="resource-button disabled"
+          aria-disabled="true"
+        >
+          Code soon
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- OVERVIEW -->
+    <!-- ===================================================== -->
+
+    <section
+      class="content-panel"
+      id="overview"
+    >
+
+      <div class="section-heading">
+
+        <h2>Overview</h2>
+
+        <p>
+          Scene-adaptive capacity for decision-relevant driving futures.
+        </p>
+
+      </div>
+
+
+      <div class="abstract-block">
+
+        <h3>Abstract</h3>
+
+        <p>
+          Multimodal planning has become central to end-to-end autonomous
+          driving because a scene may admit several plausible actions, whereas
+          their conditional average can correspond to none of them. Recent
+          methods have substantially improved the generation and selection of
+          multimodal trajectories, but many practical systems still treat the
+          candidate count as a predefined modeling choice. In reality, the
+          number of decision-relevant alternatives is scene dependent, and
+          multiple trajectories may be geometric variations of nearly
+          interchangeable driving behavior. We study this discrepancy through
+          effective multimodality: the scene-dependent capacity needed to
+          preserve distinct planning choices without allocating proposals to
+          redundant outcomes. We introduce a geometry-proposes,
+          predictive-representations-verify framework for estimating this
+          capacity. Trajectory geometry first identifies candidate pairs that
+          are likely redundant. A frozen action-conditioned predictive model
+          then rolls each candidate forward over multiple latent horizons,
+          providing conditional future-consequence evidence for detecting
+          geometrically similar proposals that should not be merged. A
+          lightweight relation verifier converts this evidence into pairwise
+          redundancy decisions that can support subsequent scene-adaptive
+          representative selection. On held-out redundancy evaluation,
+          multi-horizon predictive evidence rejects 17.6% of geometry-induced
+          false merges while retaining 95% of truly redundant pairs, and 27.7%
+          at 90% retention. These results suggest that predictive
+          representations are most useful not as a universal trajectory
+          metric, but as targeted evidence for distinctions that geometry
+          alone cannot resolve.
+        </p>
+
+      </div>
+
+
+      <figure class="main-figure">
+
+        <img
+          src="./assets/figures/effective_multimodality_motivation.png"
+          alt="Motivation for effective multimodality"
+        >
+
+        <figcaption>
+          <strong>Figure 1: Motivation for effective multimodality.</strong>
+          Multimodal planners are needed to preserve distinct safe decisions
+          and avoid unsafe averaging, but a fixed proposal budget can contain
+          overlapping policies and allocate unnecessary capacity to simple
+          scenes. We seek a scene-adaptive set that removes
+          consequence-equivalent candidates while retaining safety-critical
+          alternatives.
+        </figcaption>
+
+      </figure>
+
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- DEMOS -->
+    <!-- ===================================================== -->
+
+    <section
+      class="content-panel"
+      id="demos"
+    >
+
+      <div class="section-heading">
+
+        <h2>Qualitative Demos</h2>
+
+        <p>
+          Representative scenario-generation and policy-control cases.
+        </p>
+
+      </div>
+
+
+      <div class="demo-category">
+
+        <div class="demo-category-heading">
+
+          <h3>Scenario Generation</h3>
+
+          <p>
+            Logged interactions and their corresponding AMC-generated
+            high-risk variants.
+          </p>
+
+        </div>
+
+
+        <div class="demo-grid">
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/scenario_demo_06_logged.gif"
+              alt="First logged scenario"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 1 · Logged
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/scenario_demo_06_generated.gif"
+              alt="First AMC-generated scenario"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 1 · AMC Generated
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/scenario_demo_04_logged.gif"
+              alt="Second logged scenario"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 2 · Logged
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/scenario_demo_04_generated.gif"
+              alt="Second AMC-generated scenario"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 2 · AMC Generated
+            </figcaption>
+          </figure>
+
+        </div>
+
+      </div>
+
+
+      <div class="demo-category">
+
+        <div class="demo-category-heading">
+
+          <h3>Policy Rollouts</h3>
+
+          <p>
+            Nominal-only TD3 and risk-gated residual TD3 under matched
+            scenario conditions.
+          </p>
+
+        </div>
+
+
+        <div class="demo-grid">
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/policy_demo_05_nominal_only.gif"
+              alt="First baseline policy rollout"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 1 · Nominal-Only TD3
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/policy_demo_05_risk_conditioned.gif"
+              alt="First risk-gated policy rollout"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 1 · Risk-Gated TD3
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/policy_demo_06_nominal_only.gif"
+              alt="Second baseline policy rollout"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 2 · Nominal-Only TD3
+            </figcaption>
+          </figure>
+
+          <figure class="demo-item">
+            <img
+              src="./assets/gifs/policy_demo_06_risk_conditioned.gif"
+              alt="Second risk-gated policy rollout"
+              loading="lazy"
+            >
+            <figcaption>
+              Case 2 · Risk-Gated TD3
+            </figcaption>
+          </figure>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <footer class="footer">
+
+    <p>
+      <strong>AMC</strong>
+      · Redundancy-Aware Effective Multimodality
+    </p>
+
+
+  </footer>
+
+</body>
+</html>
+
+

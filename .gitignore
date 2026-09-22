@@ -1,0 +1,9 @@
+# Local previews and generated captures
+output/
+tmp/
+
+# Editor and operating-system files
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
